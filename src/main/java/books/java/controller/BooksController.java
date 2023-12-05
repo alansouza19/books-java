@@ -51,9 +51,9 @@ public class BooksController {
     }
 
 
-    @PutMapping("/atualiza-books/{id}")
-    public BooksModel updateBooks(@PathVariable(value = "id") long id, @RequestBody BooksDTO booksDTO){
-        BooksModel existingBookModel = booksRepository.findById(id);
+    @PutMapping("/atualiza-books")
+    public BooksModel updateBooks( @RequestBody BooksDTO booksDTO){
+        BooksModel existingBookModel = booksRepository.findById(booksDTO.getId());
         if(existingBookModel != null){
             updateModelFromDTO(existingBookModel, booksDTO);
             return booksRepository.save(existingBookModel);

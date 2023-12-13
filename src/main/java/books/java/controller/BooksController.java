@@ -45,9 +45,14 @@ public class BooksController {
         return booksRepository.save(booksModel);
     }
 
-    @DeleteMapping("/deleta-books")
-    public void deleteBooks(@RequestBody BooksModel booksModel){
-        booksRepository.delete(booksModel);
+    @DeleteMapping("/deleta-books/{id}")
+    public void deleteBooks(@PathVariable(value = "id") Integer id){
+
+        BooksModel existingBookModel = booksRepository.findById(id);
+        if(existingBookModel != null){
+            booksRepository.delete(existingBookModel);
+        }
+
     }
 
 
